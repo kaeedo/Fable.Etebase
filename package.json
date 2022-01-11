@@ -1,0 +1,39 @@
+{
+    "name": "fable.etebase",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "engines": {
+        "node": ">=16",
+        "pnpm": ">=6",
+        "npm": "please-use-pnpm",
+        "yarn": "please-use-pnpm"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*.{ts,json,md,yml,yaml,js,mdx,tsx,jsx}": [
+            "prettier --write"
+        ],
+        "src/**/*.fs": [
+            "dotnet fantomas ./src/**/*.fs"
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "husky": "7.0.4",
+        "lint-staged": "12.1.7",
+        "prettier": "2.5.1"
+    },
+    "dependencies": {
+        "etebase": "0.43.1"
+    }
+}
