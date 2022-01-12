@@ -8,10 +8,14 @@ Jest.describe (
     fun () ->
         Jest.test (
             "Should encode to base64",
-            fun () ->
+            async {
+                do! Async.Sleep 500
                 let email = "test+something@example.com"
                 let encoded = Utilities.toBase64 (email)
 
-                Jest.expect(encoded).toEqual ("")
+                Jest
+                    .expect(encoded)
+                    .toEqual ("dGVzdCtzb21ldGhpbmdAZXhhbXBsZS5jb20")
+            }
         )
 )
