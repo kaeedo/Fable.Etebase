@@ -12,9 +12,6 @@
     <None Include="splitter.config.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Fable.Jester" Version="0.33.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fable.Etebase.fsproj" />

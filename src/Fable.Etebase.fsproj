@@ -15,7 +15,7 @@
 
   <PropertyGroup>
     <NpmDependencies>
-      <NpmPackage Name="etebase" Version="&gt;= 0.43.1 lt 1.0" ResolutionStrategy="Max" />
+      <NpmPackage Name="etebase" Version=">= 0.43.1 lt 1.0" ResolutionStrategy="Max" />
     </NpmDependencies>
   </PropertyGroup>
   <ItemGroup>
@@ -26,6 +26,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Core" Version="3.6.1" />
-    <PackageReference Include="Fable.Promise" Version="2.2.2" />
   </ItemGroup>
 </Project>
