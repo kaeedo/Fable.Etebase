@@ -1,39 +1,60 @@
 {
-    "name": "fable.etebase",
-    "version": "0.0.1",
-    "description": "",
-    "main": "index.js",
-    "engines": {
-        "node": ">=16",
-        "pnpm": ">=6",
-        "npm": "please-use-pnpm",
-        "yarn": "please-use-pnpm"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "**/*.{ts,json,md,yml,yaml,js,mdx,tsx,jsx}": [
-            "prettier --write"
-        ],
-        "src/**/*.fs": [
-            "dotnet fantomas ./src/**/*.fs"
-        ]
-    },
-    "keywords": [],
-    "author": "",
-    "license": "MIT",
-    "devDependencies": {
-        "husky": "7.0.4",
-        "lint-staged": "12.1.7",
-        "prettier": "2.5.1"
-    },
-    "dependencies": {
-        "etebase": "0.43.1"
+  "name": "fable.etebase",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=6",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
+  "scripts": {
+    "install": "dotnet tool restore",
+    "test": "fable-splitter -c test/Fable.Etebase.Tests/splitter.config.js && jest",
+    "ftest": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "**/*.{ts,json,md,yml,yaml,js,mdx,tsx,jsx}": [
+      "prettier --write"
+    ],
+    "src/**/*.fs": [
+      "dotnet fantomas ./src/**/*.fs"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.16.7",
+    "@babel/plugin-transform-modules-commonjs": "7.16.8",
+    "fable-compiler": "2.13.0",
+    "fable-splitter": "2.2.1",
+    "husky": "7.0.4",
+    "jest": "27.4.7",
+    "lint-staged": "12.1.7",
+    "prettier": "2.5.1"
+  },
+  "dependencies": {
+    "etebase": "0.43.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "mjs"
+    ],
+    "testMatch": [
+      "<rootDir>/**/*.Test.js"
+    ],
+    "roots": [
+      "./dist/tests"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {}
+  }
 }

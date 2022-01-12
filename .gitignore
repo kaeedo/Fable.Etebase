@@ -4,6 +4,7 @@ fableOut/
 node_modules/
 dist/
 **/*.fs.js
+test/fableOutput
 
 # globs
 Makefile.in

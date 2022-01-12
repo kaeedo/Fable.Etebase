@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fable.Etebase", "src\Fable.Etebase.fsproj", "{4B6A00A0-3D2C-4D12-A6E4-143AAFDB9CB0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FCCCD3D5-89E6-47BB-9AD4-EB7F5CE6E27E}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fable.Etebase.Tests", "test\Fable.Etebase.Tests\Fable.Etebase.Tests.fsproj", "{99E31CDA-E9A7-462C-9306-CC43CB82E09C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{4B6A00A0-3D2C-4D12-A6E4-143AAFDB9CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B6A00A0-3D2C-4D12-A6E4-143AAFDB9CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B6A00A0-3D2C-4D12-A6E4-143AAFDB9CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E31CDA-E9A7-462C-9306-CC43CB82E09C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E31CDA-E9A7-462C-9306-CC43CB82E09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E31CDA-E9A7-462C-9306-CC43CB82E09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E31CDA-E9A7-462C-9306-CC43CB82E09C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99E31CDA-E9A7-462C-9306-CC43CB82E09C} = {FCCCD3D5-89E6-47BB-9AD4-EB7F5CE6E27E}
 	EndGlobalSection
 EndGlobal
