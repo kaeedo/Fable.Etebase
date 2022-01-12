@@ -9,6 +9,7 @@ Jest.describe (
         Jest.test (
             "Should encode to base64",
             async {
+                // Required for weird WASM behaviour
                 do! Async.Sleep 500
                 let email = "test+something@example.com"
                 let encoded = Utilities.toBase64 (email)

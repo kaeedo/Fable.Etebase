@@ -11,8 +11,7 @@
   },
   "scripts": {
     "install": "dotnet tool restore",
-    "test": "fable-splitter -c test/Fable.Etebase.Tests/splitter.config.js && jest",
-    "ftest": "jest"
+    "test": "fable-splitter -c test/Fable.Etebase.Tests/splitter.config.js && jest"
   },
   "husky": {
     "hooks": {
@@ -45,8 +44,7 @@
   },
   "jest": {
     "moduleFileExtensions": [
-      "js",
-      "mjs"
+      "js"
     ],
     "testMatch": [
       "<rootDir>/**/*.Test.js"
