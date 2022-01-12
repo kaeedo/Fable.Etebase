@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Compile Include="Utilities.Test.fs" />
-    
+
     <None Include="splitter.config.js" />
   </ItemGroup>
 
