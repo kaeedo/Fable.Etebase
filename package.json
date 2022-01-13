@@ -33,6 +33,7 @@
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/plugin-transform-modules-commonjs": "7.16.8",
+    "@testing-library/jest-dom": "5.16.1",
     "fable-compiler": "2.13.0",
     "fable-splitter": "2.2.1",
     "husky": "7.0.4",

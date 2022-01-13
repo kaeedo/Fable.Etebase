@@ -7,16 +7,18 @@ Jest.describe (
     "Account tests",
     fun () ->
         Jest.test (
-            "Should encode to base64",
-            async {
-                // Required for weird WASM behaviour
-                do! Async.Sleep 500
-                let email = "test+something@example.com"
-                let encoded = Utilities.toBase64 (email)
+            "Should be valid server",
+            (promise {
+                do!
+                    Jest
+                        .expect(Account.account.isEtebaseServer ("https://www.duckduckgo.com/"))
+                        .resolves.toBeFalsy ()
 
-                Jest
-                    .expect(encoded)
-                    .toEqual ("dGVzdCtzb21ldGhpbmdAZXhhbXBsZS5jb20")
-            }
+                do!
+                    Jest
+                        .expect(Account.account.isEtebaseServer ("https://api.etebase.com/partner/etesync/"))
+                        .resolves.toBeTruthy ()
+            })
+
         )
 )

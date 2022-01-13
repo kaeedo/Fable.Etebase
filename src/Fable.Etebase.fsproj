@@ -1,10 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>TODO</Description>
     <PackageProjectUrl>TODO</PackageProjectUrl>
     <RepositoryUrl>TODO.git</RepositoryUrl>
     <PackageLicenseUrl>TODO</PackageLicenseUrl>
-    <PackageIconUrl></PackageIconUrl>
+    <PackageIconUrl>
+    </PackageIconUrl>
     <PackageTags>fsharp;fable;etebase;etebase-js</PackageTags>
     <Authors>Kai Ito</Authors>
     <Version>0.0.1</Version>
@@ -12,14 +13,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageReleaseNotes>TODO</PackageReleaseNotes>
   </PropertyGroup>
-
   <PropertyGroup>
     <NpmDependencies>
-      <NpmPackage Name="etebase" Version=">= 0.43.1 lt 1.0" ResolutionStrategy="Max" />
+      <NpmPackage Name="etebase" Version="gte 0.43.1 lt 1.0" ResolutionStrategy="Max" />
     </NpmDependencies>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
+    <Compile Include="Account.fs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js" Exclude="**\*.fs.js" PackagePath="fable\" />
