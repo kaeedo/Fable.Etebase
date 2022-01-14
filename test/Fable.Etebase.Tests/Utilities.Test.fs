@@ -6,12 +6,7 @@ open Fable.Etebase
 Jest.describe (
     "Base64 encoding",
     fun () ->
-        Jest.beforeAll (
-            async {
-                // Required for weird WASM behaviour
-                do! Async.Sleep 500
-            }
-        )
+        Jest.beforeAll (promise { do! Utilities.ready })
 
         Jest.test (
             "Should encode to base64",
@@ -34,7 +29,7 @@ Jest.describe (
         )
 
         Jest.test (
-            "Should generate randomy bytes",
+            "Should generate random bytes",
             fun () ->
                 let randomBytes = Utilities.randomBytes 32
                 Jest.expect(randomBytes).toHaveLength (32)

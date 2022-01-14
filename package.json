@@ -54,7 +54,8 @@
     "roots": [
       "./dist/tests"
     ],
-    "testEnvironment": "jsdom",
+    "testTimeout": 15000,
+    "testEnvironment": "node",
     "transform": {}
   }
 }

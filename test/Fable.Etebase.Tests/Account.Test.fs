@@ -3,26 +3,16 @@ module Account.Test
 open Fable.Jester
 open Fable.Etebase
 
-let username = ""
-let password = ""
-let email = ""
 
 Jest.describe (
     "Account tests",
     fun () ->
-
-        Jest.test.skip (
-            // TODO: Something something cross origin null
+        Jest.test (
             "Should be valid server",
             (promise {
                 do!
                     Jest
-                        .expect(Account.account.isEtebaseServer ("https://www.duckduckgo.com/"))
-                        .resolves.toBeFalsy ()
-
-                do!
-                    Jest
-                        .expect(Account.account.isEtebaseServer ("https://api.etebase.com"))
+                        .expect(Account.account.isEtebaseServer (TestHelpers.server))
                         .resolves.toBeTruthy ()
             })
 
@@ -31,11 +21,11 @@ Jest.describe (
         Jest.test (
             "Should login",
             (promise {
-                let! loggedIn = Account.account.login (username, password)
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
                 Jest
                     .expect(loggedIn.serverUrl)
-                    .toEqual ("https://api.etebase.com")
+                    .toEqual (TestHelpers.server)
 
                 Jest
                     .expect(loggedIn.user.pubkey)
@@ -46,44 +36,38 @@ Jest.describe (
                     .toHaveLength (104)
 
                 Jest
-                    .expect(loggedIn.user.username)
-                    .toEqual (username)
+                    .expect(loggedIn.user.username.ToLowerInvariant())
+                    .toEqual (TestHelpers.username.ToLowerInvariant())
 
-                Jest.expect(loggedIn.user.email).toEqual (email)
+                Jest
+                    .expect(loggedIn.user.email)
+                    .toEqual (TestHelpers.email)
 
                 do! loggedIn.logout ()
             })
-        )
-
-        Jest.test.skip (
-            // TODO: run tests against localhost
-            "Should Signup",
-            (promise {
-                let user: Fable.Etebase.User =
-                    {| email = email
-                       username = Utilities.toBase64 (email) |}
-
-                let! response = Account.account.signup (user, password)
-
-                Fable.Core.JS.console.log (response)
-
-                Jest.expect("loggedIn.user.email").toEqual (email)
-            })
-
         )
 
         Jest.test (
-            "Should get dashboard url",
+            "Should Signup",
             (promise {
-                let! loggedIn = Account.account.login (username, password)
+                let randomUsername =
+                    TestHelpers.randomStr (15)
 
-                let! url = loggedIn.getDashboardUrl ()
+                let randomEmail =
+                    TestHelpers.randomStr (10) + "@example.com"
+
+                let randomPassword =
+                    TestHelpers.randomStr (15)
+
+                let randomUser: Fable.Etebase.User =
+                    {| email = randomEmail
+                       username = randomUsername |}
+
+                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.server)
 
                 Jest
-                    .expect(url.Substring(0, 53))
-                    .toEqual ("https://dashboard.etebase.com/user/partner/dashboard/")
-
-                do! loggedIn.logout ()
+                    .expect(response.user.email.ToLowerInvariant())
+                    .toEqual (randomEmail.ToLowerInvariant())
             })
 
         )
@@ -91,7 +75,7 @@ Jest.describe (
         Jest.test (
             "Should logout",
             (promise {
-                let! loggedIn = Account.account.login (username, password)
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
                 Jest.expect(loggedIn.authToken).not.toBeNull ()
 
@@ -105,7 +89,7 @@ Jest.describe (
         Jest.test (
             "Should fetch token",
             (promise {
-                let! loggedIn = Account.account.login (username, password)
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
                 Jest.expect(loggedIn.authToken).not.toBeNull ()
                 loggedIn.authToken <- None
@@ -118,5 +102,32 @@ Jest.describe (
                 do! loggedIn.logout ()
             })
 
+        )
+
+        Jest.test (
+            "Should get dashboard url",
+            (promise {
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+
+                let! assss =
+                    (loggedIn.getDashboardUrl ())
+                        .catch (fun t -> t.ToString())
+
+                // We expect an error message of "No dashborad" since we're using a test container
+                Jest
+                    .expect(assss)
+                    .toEqual ("HTTPError: 400 This server doesn't have a user dashboard.")
+            })
+        )
+
+        Jest.test (
+            "Should get collection manager",
+            (promise {
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+
+                Jest
+                    .expect(loggedIn.getCollectionManager ())
+                    .not.toBeUndefined ()
+            })
         )
 )

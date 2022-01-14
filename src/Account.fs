@@ -4,9 +4,6 @@ open Fable.Core
 open Fable.Core.JS
 open Fable.Core.JsInterop
 
-//https://github.com/fable-compiler/fable3-samples/blob/main/interop/public/MyClass.js
-//https://github.com/fable-compiler/fable3-samples/blob/main/interop/src/App.fs
-
 type User = {| username: string; email: string |}
 
 type LoginResponseUser =
@@ -22,11 +19,11 @@ type Account =
     abstract authToken: string option with get, set
 
     //save(encryptionKey_?: Uint8Array): Promise<base64>;
-    //getCollectionManager(): CollectionManager;
     //getInvitationManager(): CollectionInvitationManager;
+    abstract getCollectionManager: unit -> CollectionManager
     abstract logout: unit -> Promise<unit>
     abstract fetchToken: unit -> Promise<unit>
-    abstract changePassword: string -> Promise<unit>
+    abstract changePassword: password: string -> Promise<unit>
     abstract getDashboardUrl: unit -> Promise<string>
 
 

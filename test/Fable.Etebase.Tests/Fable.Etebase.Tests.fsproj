@@ -5,8 +5,9 @@
     <WarnOn>3390;$(WarnOn)</WarnOn>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="TestHelpers.fs" />
     <Compile Include="Utilities.Test.fs" />
-
+    <Compile Include="CollectionManager.Test.fs" />
     <Compile Include="Account.Test.fs" />
     <None Include="splitter.config.js" />
   </ItemGroup>
