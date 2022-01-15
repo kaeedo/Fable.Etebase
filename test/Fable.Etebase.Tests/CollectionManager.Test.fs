@@ -64,14 +64,14 @@ Jest.describe.only (
                         TestHelpers.randomStr (20)
                     )
 
-                do! collectionManager.upload(col1)
-                do! collectionManager.upload(col2)
+                do! collectionManager.upload (col1)
+                do! collectionManager.upload (col2)
 
-                let! resultList = collectionManager.list("fable.etebase.testCol")
+                let! resultList = collectionManager.list ("fable.etebase.testCol")
 
                 Jest
                     .expect(resultList.data.Length)
-                    .toBeGreaterThan(1)
+                    .toBeGreaterThan (1)
             })
         ))
 )

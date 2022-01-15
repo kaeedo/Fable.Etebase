@@ -8,6 +8,8 @@ type OutputFormat =
     | Uint8Array = 0
     | String = 1
 
+type RemovedCollection = {| uid: string |}
+
 type Collection =
     abstract etag: string
     abstract uid: string

@@ -14,8 +14,6 @@ type FetchOptions =
        stoken: string option
        prefetch: PrefetchOption option |}
 
-type RemovedCollection = {| a: int |}
-
 type CollectionListResult =
     {| data: Collection array
        removedMemberships: (RemovedCollection array) option
@@ -24,12 +22,6 @@ type CollectionListResult =
 
 type CollectionManager =
     // fetch(colUid: base64, options?: FetchOptions): Promise<Collection>;
-    // list(colType: string | string[], options?: FetchOptions): Promise<{
-    //     data: Collection[];
-    //     removedMemberships?: import("./OnlineManagers").RemovedCollection[] | undefined;
-    //     stoken: string;
-    //     done: boolean;
-    // }>;
     // transaction(collection: Collection, options?: FetchOptions): Promise<void>;
     // cacheSave(collection: Collection, options?: {
     //     saveContent: boolean;
