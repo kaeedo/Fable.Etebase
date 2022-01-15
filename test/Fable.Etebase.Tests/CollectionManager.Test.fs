@@ -34,5 +34,44 @@ Jest.describe.only (
                     .expect(collectionContent)
                     .toEqual (randomContent)
             })
+        )
+
+        Jest.test (
+            "Should list collections",
+            (promise {
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+
+                let collectionManager =
+                    loggedIn.getCollectionManager ()
+
+                let! col1 =
+                    collectionManager.create (
+                        "fable.etebase.testCol",
+                        Some
+                            {| name = TestHelpers.randomStr (5)
+                               description = TestHelpers.randomStr (20)
+                               color = "#0f0" |},
+                        TestHelpers.randomStr (20)
+                    )
+
+                let! col2 =
+                    collectionManager.create (
+                        "fable.etebase.testCol",
+                        Some
+                            {| name = TestHelpers.randomStr (5)
+                               description = TestHelpers.randomStr (20)
+                               color = "#0f0" |},
+                        TestHelpers.randomStr (20)
+                    )
+
+                do! collectionManager.upload(col1)
+                do! collectionManager.upload(col2)
+
+                let! resultList = collectionManager.list("fable.etebase.testCol")
+
+                Jest
+                    .expect(resultList.data.Length)
+                    .toBeGreaterThan(1)
+            })
         ))
 )

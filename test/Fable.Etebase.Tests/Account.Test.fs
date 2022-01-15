@@ -87,6 +87,36 @@ Jest.describe (
         )
 
         Jest.test (
+            "Should change password",
+            (promise {
+                let randomUsername =
+                    TestHelpers.randomStr (15)
+
+                let randomEmail =
+                    TestHelpers.randomStr (10) + "@example.com"
+
+                let randomPassword =
+                    TestHelpers.randomStr (15)
+
+                let randomUser: Fable.Etebase.User =
+                    {| email = randomEmail
+                       username = randomUsername |}
+
+                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.server)
+
+                Jest
+                    .expect(response.user.email.ToLowerInvariant())
+                    .toEqual (randomEmail.ToLowerInvariant())
+
+                let newRandomPassword =
+                    TestHelpers.randomStr (15)
+
+                do! Jest.expect(response.changePassword(newRandomPassword)).resolves.toBeTruthy()
+            })
+
+        )
+
+        Jest.test (
             "Should fetch token",
             (promise {
                 let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
@@ -128,6 +158,22 @@ Jest.describe (
                 Jest
                     .expect(loggedIn.getCollectionManager ())
                     .not.toBeUndefined ()
+            })
+        )
+
+        Jest.test (
+            "Should save and restore session",
+            (promise {
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+
+                let encryptionKey = Utilities.randomBytes(32)
+                let! saveSession = loggedIn.save(encryptionKey)
+
+                Jest.expect(saveSession.Length).toBeGreaterThan(1)
+
+                let! restored = Account.account.restore(saveSession, encryptionKey)
+
+                Jest.expect(restored.user.username).toEqual(TestHelpers.username)
             })
         )
 )
