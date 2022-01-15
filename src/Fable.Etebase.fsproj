@@ -22,6 +22,7 @@
     <Compile Include="Utilities.fs" />
     <Compile Include="Collection.fs" />
     <Compile Include="CollectionManager.fs" />
+    <Compile Include="CollectionInvitationManager.fs" />
     <Compile Include="Account.fs" />
   </ItemGroup>
   <ItemGroup>

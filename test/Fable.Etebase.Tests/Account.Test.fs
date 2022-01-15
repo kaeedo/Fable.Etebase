@@ -151,29 +151,36 @@ Jest.describe (
         )
 
         Jest.test (
-            "Should get collection manager",
-            (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
-
-                Jest
-                    .expect(loggedIn.getCollectionManager ())
-                    .not.toBeUndefined ()
-            })
-        )
-
-        Jest.test (
             "Should save and restore session",
             (promise {
                 let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
                 let encryptionKey = Utilities.randomBytes(32)
-                let! saveSession = loggedIn.save(encryptionKey)
+                let! savedSession = loggedIn.save(encryptionKey)
 
-                Jest.expect(saveSession.Length).toBeGreaterThan(1)
+                Jest.expect(savedSession.Length).toBeGreaterThan(1)
 
-                let! restored = Account.account.restore(saveSession, encryptionKey)
+                let! restored = Account.account.restore(savedSession, encryptionKey)
 
                 Jest.expect(restored.user.username).toEqual(TestHelpers.username)
+            })
+        )
+
+        Jest.test (
+            "Should get collection manager",
+            (promise {
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+
+                Jest.expect(loggedIn.getCollectionManager ()).toBeDefined()
+            })
+        )
+
+        Jest.test (
+            "Should get invitation manager",
+            (promise {
+                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+
+                Jest.expect(loggedIn.getCollectionManager ()).toBeDefined()
             })
         )
 )

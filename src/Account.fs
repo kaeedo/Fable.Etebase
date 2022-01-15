@@ -12,14 +12,13 @@ type LoginResponseUser =
        pubkey: byte array
        encryptedContent: byte array |}
 
-
 type Account =
     abstract serverUrl: string with get, set
     abstract user: LoginResponseUser with get, set
     abstract authToken: string option with get, set
 
-    //getInvitationManager(): CollectionInvitationManager;
-    abstract save: ?encryptionKey: byte array -> Promise<string>;
+    abstract getInvitationManager: unit -> CollectionInvitationManager
+    abstract save: ?encryptionKey: byte array -> Promise<string>
     abstract getCollectionManager: unit -> CollectionManager
     abstract logout: unit -> Promise<unit>
     abstract fetchToken: unit -> Promise<unit>
