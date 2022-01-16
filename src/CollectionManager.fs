@@ -20,22 +20,46 @@ type CollectionListResult =
        stoken: string
        ``done``: bool |}
 
-type CollectionManager =
-    // fetch(colUid: base64, options?: FetchOptions): Promise<Collection>;
-    // transaction(collection: Collection, options?: FetchOptions): Promise<void>;
-    // cacheSave(collection: Collection, options?: {
-    //     saveContent: boolean;
-    // }): Uint8Array;
-    // cacheLoad(cache: Uint8Array): Collection;
-    // getItemManager(col_: Collection): ItemManager;
-    // getMemberManager(col: Collection): CollectionMemberManager;
+type ItemMetadata =
+    abstract ``type``: string option
+    abstract name: string option
+    abstract mtime: string option
+    abstract description: string option
+    abstract color: string option
 
+type CollectionManager =
+
+    abstract getItemManager: collection: Collection -> ItemManager
+    abstract getMemberManager: collection: Collection -> CollectionMemberManager
+    abstract fetch: collectionUid: string * ?options: FetchOptions -> Promise<Collection>
+    abstract cacheSave: collection: Collection * ?options: {| saveContent: bool |} -> byte array
+    abstract cacheLoad: cache: byte array -> Collection
     abstract upload: collection: Collection * ?options: FetchOptions -> Promise<unit>
-    abstract create<'a> : colType: string * meta: 'a * content: string -> Promise<Collection>
-    abstract create<'a> : colType: string * meta: 'a * content: byte array -> Promise<Collection>
+    abstract transaction: collection: Collection * ?options: FetchOptions -> Promise<unit>
+
+    /// itemMetadat must extend the Fable.Etebase.ItemMetadata interface
+    /// Do this via an F# class,
+    /// Or using a record type:
+    /// e.g.:
+    /// type MyItem =
+    ///     { Other: int
+    ///       Name: string }
+    ///         interface ItemMetadata with
+    ///             member this.name = Some this.Name
+    abstract create: colType: string * itemMetadata: #ItemMetadata * content: string -> Promise<Collection>
+
+    /// itemMetadat must extend the Fable.Etebase.ItemMetadata interface
+    /// Do this via an F# class,
+    /// Or using a record type:
+    /// e.g.:
+    /// type MyItem =
+    ///     { Other: int
+    ///       Name: string }
+    ///         interface ItemMetadata with
+    ///             member this.name = Some this.Name
+    abstract create: colType: string * itemMetadata: #ItemMetadata * content: byte array -> Promise<Collection>
     abstract list: callType: string * ?options: FetchOptions -> Promise<CollectionListResult>
     abstract list: callType: string array * ?options: FetchOptions -> Promise<CollectionListResult>
-
 
 module CollectionManager =
     [<Import("CollectionManager", "Etebase")>]

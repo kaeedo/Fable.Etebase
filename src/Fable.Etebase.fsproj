@@ -21,6 +21,8 @@
   <ItemGroup>
     <Compile Include="Utilities.fs" />
     <Compile Include="Collection.fs" />
+    <Compile Include="ItemManager.fs" />
+    <Compile Include="CollectionMemberManager.fs" />
     <Compile Include="CollectionManager.fs" />
     <Compile Include="CollectionInvitationManager.fs" />
     <Compile Include="Account.fs" />
