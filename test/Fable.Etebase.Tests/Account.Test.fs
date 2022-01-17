@@ -111,7 +111,15 @@ Jest.describe (
                 let newRandomPassword =
                     TestHelpers.randomStr (15)
 
-                do! Jest.expect(response.changePassword(newRandomPassword)).resolves.toBeTruthy()
+                do! response.changePassword (newRandomPassword)
+                do! response.logout ()
+
+                let! loggedInWithNewPassowrd =
+                    Account.account.login (randomUsername, newRandomPassword, TestHelpers.server)
+
+                Jest
+                    .expect(loggedInWithNewPassowrd.user.username)
+                    .toEqual (randomUsername.ToLowerInvariant())
             })
 
         )
@@ -139,13 +147,13 @@ Jest.describe (
             (promise {
                 let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
-                let! assss =
+                let! getDashboardResponse =
                     (loggedIn.getDashboardUrl ())
                         .catch (fun t -> t.ToString())
 
                 // We expect an error message of "No dashborad" since we're using a test container
                 Jest
-                    .expect(assss)
+                    .expect(getDashboardResponse)
                     .toEqual ("HTTPError: 400 This server doesn't have a user dashboard.")
             })
         )
@@ -155,14 +163,20 @@ Jest.describe (
             (promise {
                 let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
-                let encryptionKey = Utilities.randomBytes(32)
-                let! savedSession = loggedIn.save(encryptionKey)
+                let encryptionKey =
+                    Utilities.randomBytes (32)
 
-                Jest.expect(savedSession.Length).toBeGreaterThan(1)
+                let! savedSession = loggedIn.save (encryptionKey)
 
-                let! restored = Account.account.restore(savedSession, encryptionKey)
+                Jest
+                    .expect(savedSession.Length)
+                    .toBeGreaterThan (1)
 
-                Jest.expect(restored.user.username).toEqual(TestHelpers.username)
+                let! restored = Account.account.restore (savedSession, encryptionKey)
+
+                Jest
+                    .expect(restored.user.username)
+                    .toEqual (TestHelpers.username.ToLowerInvariant())
             })
         )
 
@@ -171,7 +185,9 @@ Jest.describe (
             (promise {
                 let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
-                Jest.expect(loggedIn.getCollectionManager ()).toBeDefined()
+                Jest
+                    .expect(loggedIn.getCollectionManager ())
+                    .toBeDefined ()
             })
         )
 
@@ -180,7 +196,9 @@ Jest.describe (
             (promise {
                 let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
 
-                Jest.expect(loggedIn.getCollectionManager ()).toBeDefined()
+                Jest
+                    .expect(loggedIn.getCollectionManager ())
+                    .toBeDefined ()
             })
         )
 )
