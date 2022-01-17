@@ -3,17 +3,7 @@ module CollectionManager.Test
 open Fable.Core
 open Fable.Jester
 open Fable.Etebase
-
-type CollectionItem =
-    { Name: string
-      Description: string
-      Color: string }
-    interface ItemMetadata with
-        member this.name = Some this.Name
-        member this.description = Some this.Description
-        member this.color = Some this.Color
-        member this.mtime = None
-        member this.``type`` = None
+open Collection.Test
 
 Jest.describe (
     "Collection Manager tests",
