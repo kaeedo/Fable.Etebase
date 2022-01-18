@@ -5,19 +5,23 @@ open Fable.Core.JS
 open Fable.Core.JsInterop
 
 type Item =
-    abstract derp: string
-// verify(): boolean;
-// setMeta<T>(meta: ItemMetadata<T>): void;
-// getMeta<T>(): ItemMetadata<T>;
-// setContent(content: Uint8Array | string): Promise<void>;
-// getContent(outputFormat?: OutputFormat.Uint8Array): Promise<Uint8Array>;
-// getContent(outputFormat?: OutputFormat.String): Promise<string>;
-// delete(preserveContent?: boolean): void;
-// get uid(): string;
-// get etag(): string;
-// get isDeleted(): boolean;
-// get isMissingContent(): boolean;
-// _clone(): Item;
+    abstract uid: string
+    abstract etag: string
+    abstract isDeleted: bool
+    abstract isMissingContent: bool
+
+    [<Emit("$0.getContent(0)")>]
+    abstract getContentBytes: unit -> Promise<byte array>
+
+    [<Emit("$0.getContent(1)")>]
+    abstract getContentString: unit -> Promise<string>
+
+    abstract setMeta: metadata: #ItemMetadata -> unit
+    abstract getMeta<'a when 'a :> ItemMetadata> : unit -> 'a
+    abstract verify: unit -> bool
+    abstract setContent: content: string -> Promise<unit>
+    abstract setContent: content: byte array -> Promise<unit>
+
 
 module Item =
     [<Import("Item", "Etebase")>]

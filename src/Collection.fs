@@ -4,24 +4,6 @@ open Fable.Core
 open Fable.Core.JS
 open Fable.Core.JsInterop
 
-type OutputFormat =
-    | Uint8Array = 0
-    | String = 1
-
-type CollectionAccessLevel =
-    | ReadOnly = 0
-    | Admin = 1
-    | ReadWrite = 2
-
-type RemovedCollection = {| uid: string |}
-
-type ItemMetadata =
-    abstract ``type``: string option
-    abstract name: string option
-    abstract mtime: string option
-    abstract description: string option
-    abstract color: string option
-
 type Collection =
     abstract etag: string
     abstract uid: string

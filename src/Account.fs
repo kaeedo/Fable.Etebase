@@ -4,14 +4,6 @@ open Fable.Core
 open Fable.Core.JS
 open Fable.Core.JsInterop
 
-type User = {| username: string; email: string |}
-
-type LoginResponseUser =
-    {| username: string
-       email: string
-       pubkey: byte array
-       encryptedContent: byte array |}
-
 type Account =
     abstract serverUrl: string with get, set
     abstract user: LoginResponseUser with get, set

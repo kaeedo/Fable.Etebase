@@ -15,7 +15,6 @@ Jest.describe.skip (
                         .expect(Account.account.isEtebaseServer (TestHelpers.server))
                         .resolves.toBeTruthy ()
             })
-
         )
 
         Jest.test (
@@ -59,9 +58,9 @@ Jest.describe.skip (
                 let randomPassword =
                     TestHelpers.randomStr (15)
 
-                let randomUser: Fable.Etebase.User =
-                    {| email = randomEmail
-                       username = randomUsername |}
+                let randomUser =
+                    { Fable.Etebase.User.email = randomEmail
+                      username = randomUsername }
 
                 let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.server)
 
@@ -98,9 +97,9 @@ Jest.describe.skip (
                 let randomPassword =
                     TestHelpers.randomStr (15)
 
-                let randomUser: Fable.Etebase.User =
-                    {| email = randomEmail
-                       username = randomUsername |}
+                let randomUser =
+                    { User.email = randomEmail
+                      username = randomUsername }
 
                 let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.server)
 

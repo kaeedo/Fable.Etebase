@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Include="TestHelpers.fs" />
     <Compile Include="Utilities.Test.fs" />
+    <Compile Include="Item.Test.fs" />
+    <Compile Include="ItemManager.Test.fs" />
     <Compile Include="Collection.Test.fs" />
     <Compile Include="CollectionSharing.Test.fs" />
     <Compile Include="CollectionManager.Test.fs" />

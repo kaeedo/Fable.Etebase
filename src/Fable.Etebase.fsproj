@@ -19,6 +19,7 @@
     </NpmDependencies>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Types.fs" />
     <Compile Include="Utilities.fs" />
     <Compile Include="Item.fs" />
     <Compile Include="ItemManager.fs" />
