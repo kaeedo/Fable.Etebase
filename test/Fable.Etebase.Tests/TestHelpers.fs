@@ -17,4 +17,4 @@ let randomStr =
 let username = "JessicaHyde"
 let password = "Mr. Rabbit"
 let email = "jessicahyde@example.com"
-let server = "http://172.18.123.214:3735"
+let server = "http://172.18.115.224:3735"

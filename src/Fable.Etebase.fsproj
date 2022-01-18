@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
+    <Compile Include="Item.fs" />
     <Compile Include="Collection.fs" />
     <Compile Include="ItemManager.fs" />
     <Compile Include="CollectionMemberManager.fs" />

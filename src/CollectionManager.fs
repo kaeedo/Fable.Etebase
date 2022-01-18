@@ -20,13 +20,6 @@ type CollectionListResult =
        stoken: string
        ``done``: bool |}
 
-type ItemMetadata =
-    abstract ``type``: string option
-    abstract name: string option
-    abstract mtime: string option
-    abstract description: string option
-    abstract color: string option
-
 type CollectionManager =
 
     abstract getItemManager: collection: Collection -> ItemManager
