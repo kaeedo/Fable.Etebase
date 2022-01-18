@@ -4,16 +4,56 @@ open Fable.Core
 open Fable.Core.JS
 open Fable.Core.JsInterop
 
+type SignedInvitation =
+    { uid: string
+      version: int
+      username: string
+      collection: string
+      accessLevel: CollectionAccessLevel
+      signedEncryptionKey: byte array
+      fromUsername: string option
+      fromPubkey: byte array }
+
+type UserProfile = { pubkey: byte array }
+
+type SignedInvitationRead =
+    { uid: string
+      version: int
+      username: string
+      Collection: string
+      accessLevel: CollectionAccessLevel
+      signedEncryptionKey: byte array
+      fromUsername: string option
+      fromPubkey: byte array }
+
+type CollectionInvitationListResponse<'a> =
+    { iterator: string
+      ``done``: bool
+      data: 'a array }
+
+type InvitationFetchOptions =
+    { limit: int option
+      iterator: string option }
+
 type CollectionInvitationManager =
     abstract pubKey: byte array
-    // listIncoming(options?: InvitationFetchOptions): Promise<import("./OnlineManagers").CollectionInvitationListResponse<import("./EncryptedModels").SignedInvitationRead>>;
-    // listOutgoing(options?: InvitationFetchOptions): Promise<import("./OnlineManagers").CollectionInvitationListResponse<import("./EncryptedModels").SignedInvitationRead>>;
-    // accept(invitation: SignedInvitation): Promise<{}>;
-    // reject(invitation: SignedInvitation): Promise<{}>;
-    // fetchUserProfile(username: string): Promise<import("./OnlineManagers").UserProfile>;
-    // invite(col: Collection, username: string, pubkey: Uint8Array, accessLevel: CollectionAccessLevel): Promise<void>;
-    // disinvite(invitation: SignedInvitation): Promise<{}>;
+    abstract disinvite: invitation: SignedInvitation -> Promise<obj>
+    abstract accept: invitation: SignedInvitation -> Promise<obj>
+    abstract reject: invitation: SignedInvitation -> Promise<obj>
+
+    abstract invite:
+        collection: Collection * username: string * pubkey: byte array * accessLevel: CollectionAccessLevel ->
+            Promise<unit>
+
+    abstract fetchUserProfile: username: string -> Promise<UserProfile>
+
+    abstract listIncoming:
+        ?options: InvitationFetchOptions -> Promise<CollectionInvitationListResponse<SignedInvitationRead>>
+
+    abstract listOutgoing:
+        ?options: InvitationFetchOptions -> Promise<CollectionInvitationListResponse<SignedInvitationRead>>
 
 module CollectionInvitationManager =
     [<Import("CollectionInvitationManager", "Etebase")>]
-    let collectionInvitationManager: CollectionInvitationManager = jsNative
+    let collectionInvitationManager: CollectionInvitationManager =
+        jsNative

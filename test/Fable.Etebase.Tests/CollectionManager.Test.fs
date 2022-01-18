@@ -5,7 +5,7 @@ open Fable.Jester
 open Fable.Etebase
 open Collection.Test
 
-Jest.describe (
+Jest.describe.skip (
     "Collection Manager tests",
     (fun () ->
         Jest.test (

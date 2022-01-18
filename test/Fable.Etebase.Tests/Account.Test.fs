@@ -4,7 +4,7 @@ open Fable.Jester
 open Fable.Etebase
 
 
-Jest.describe (
+Jest.describe.skip (
     "Account tests",
     fun () ->
         Jest.test (

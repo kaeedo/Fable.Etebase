@@ -8,6 +8,7 @@
     <Compile Include="TestHelpers.fs" />
     <Compile Include="Utilities.Test.fs" />
     <Compile Include="Collection.Test.fs" />
+    <Compile Include="CollectionSharing.Test.fs" />
     <Compile Include="CollectionManager.Test.fs" />
     <Compile Include="Account.Test.fs" />
     <None Include="splitter.config.js" />

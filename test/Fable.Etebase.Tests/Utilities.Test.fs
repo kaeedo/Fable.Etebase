@@ -3,7 +3,7 @@
 open Fable.Jester
 open Fable.Etebase
 
-Jest.describe (
+Jest.describe.skip (
     "Base64 encoding",
     fun () ->
         Jest.beforeAll (promise { do! Utilities.ready })
