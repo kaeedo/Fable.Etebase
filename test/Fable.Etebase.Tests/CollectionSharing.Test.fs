@@ -1,4 +1,4 @@
-module CollectionMemberManager.Test
+module CollectionSharing.Test
 
 open Fable.Core
 open Fable.Jester
@@ -16,13 +16,18 @@ type CollectionItem =
         member this.``type`` = None
 
 
-Jest.describe (
+Jest.describe.skip (
     "Collection Sharing tests",
     fun () ->
         Jest.test (
             "Should modify access level",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()

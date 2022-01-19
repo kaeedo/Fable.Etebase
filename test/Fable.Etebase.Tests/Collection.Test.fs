@@ -27,13 +27,18 @@ type CollectionItemOther =
         member this.mtime = None
         member this.``type`` = None
 
-Jest.describe.skip (
+Jest.describe (
     "Collection tests",
     fun () ->
         Jest.test (
             "Should get collection type",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -61,7 +66,12 @@ Jest.describe.skip (
         Jest.test (
             "Should verify",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -84,7 +94,12 @@ Jest.describe.skip (
         Jest.test (
             "Should delete",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -109,7 +124,12 @@ Jest.describe.skip (
         Jest.test (
             "Should set and get meta data",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -137,6 +157,37 @@ Jest.describe.skip (
                     collection.getMeta ()
 
                 Jest.expect(metaData.Extra).toBe (1)
+            })
+        )
+
+        Jest.test (
+            "Should create and get content string",
+            (promise {
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
+
+                let collectionManager =
+                    loggedIn.getCollectionManager ()
+
+                let randomContent =
+                    TestHelpers.randomStr (20)
+
+                let item =
+                    { CollectionItem.Name = TestHelpers.randomStr (5)
+                      Description = TestHelpers.randomStr (20)
+                      Color = "#0f0" }
+
+                let! collection = collectionManager.create ("fable.etebase.testCol", item, randomContent)
+
+                let! collectionContent = collection.getContentString ()
+
+                Jest
+                    .expect(collectionContent)
+                    .toEqual (randomContent)
             })
         )
 )

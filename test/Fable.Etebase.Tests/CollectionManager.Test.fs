@@ -5,39 +5,18 @@ open Fable.Jester
 open Fable.Etebase
 open Collection.Test
 
-Jest.describe.skip (
+Jest.describe (
     "Collection Manager tests",
     (fun () ->
         Jest.test (
-            "Should create and get content string",
-            (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
-
-                let collectionManager =
-                    loggedIn.getCollectionManager ()
-
-                let randomContent =
-                    TestHelpers.randomStr (20)
-
-                let item =
-                    { CollectionItem.Name = TestHelpers.randomStr (5)
-                      Description = TestHelpers.randomStr (20)
-                      Color = "#0f0" }
-
-                let! collection = collectionManager.create ("fable.etebase.testCol", item, randomContent)
-
-                let! collectionContent = collection.getContentString ()
-
-                Jest
-                    .expect(collectionContent)
-                    .toEqual (randomContent)
-            })
-        )
-
-        Jest.test (
             "Should list collections",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -65,7 +44,12 @@ Jest.describe.skip (
         Jest.test (
             "Should save and load to cache",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -100,7 +84,12 @@ Jest.describe.skip (
         Jest.test (
             "Should fetch single item",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -128,7 +117,12 @@ Jest.describe.skip (
         Jest.test (
             "Should get item manager",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -152,7 +146,12 @@ Jest.describe.skip (
         Jest.test (
             "Should get collection member manager",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()

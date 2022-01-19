@@ -1,4 +1,4 @@
-module Collection.Test
+module Item.Test
 
 open Fable.Core
 open Fable.Jester
@@ -55,7 +55,12 @@ Jest.describe (
         Jest.test (
             "Should verify",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -79,8 +84,6 @@ Jest.describe (
                       ItemId = 42 }
 
                 let! createdItem = itemManager.create (item, TestHelpers.randomStr (20))
-
-                // need to upload/batch/transaction
 
                 do! collectionManager.upload (collection)
 
@@ -91,7 +94,12 @@ Jest.describe (
         Jest.test (
             "Should delete",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -118,16 +126,21 @@ Jest.describe (
 
                 do! collectionManager.upload (collection)
 
-                //createdItem.delete ()
-                // need to upload/batch/transaction
-                Jest.expect(collection.isDeleted).toBe (true)
+                createdItem.delete ()
+
+                Jest.expect(createdItem.isDeleted).toBe (true)
             })
         )
 
         Jest.test (
             "Should set and get meta data",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let collectionManager =
                     loggedIn.getCollectionManager ()
@@ -165,6 +178,50 @@ Jest.describe (
                     createdItem.getMeta ()
 
                 Jest.expect(metaData.Extra).toBe ("1fe")
+            })
+        )
+
+        Jest.test (
+            "Should get content",
+            (promise {
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
+
+                let collectionManager =
+                    loggedIn.getCollectionManager ()
+
+                let randomContent =
+                    TestHelpers.randomStr (20)
+
+                let collectionItem =
+                    { CollectionItem.Name = TestHelpers.randomStr (5)
+                      Description = TestHelpers.randomStr (20)
+                      Color = "#0f0" }
+
+                let! collection = collectionManager.create ("fable.etebase.testCol", collectionItem, randomContent)
+
+                let itemManager =
+                    collectionManager.getItemManager (collection)
+
+                let item =
+                    { Item.Name = TestHelpers.randomStr (5)
+                      Description = TestHelpers.randomStr (20)
+                      ItemId = 42 }
+
+                let randomContent =
+                    TestHelpers.randomStr (20)
+
+                let! createdItem = itemManager.create (item, randomContent)
+
+                do! collectionManager.upload (collection)
+
+                let! content = createdItem.getContentString ()
+
+                Jest.expect(content).toBe (randomContent)
             })
         )
 )

@@ -4,7 +4,7 @@ open Fable.Jester
 open Fable.Etebase
 
 
-Jest.describe.skip (
+Jest.describe (
     "Account tests",
     fun () ->
         Jest.test (
@@ -12,7 +12,7 @@ Jest.describe.skip (
             (promise {
                 do!
                     Jest
-                        .expect(Account.account.isEtebaseServer (TestHelpers.server))
+                        .expect(Account.account.isEtebaseServer (TestHelpers.testData.Server))
                         .resolves.toBeTruthy ()
             })
         )
@@ -20,11 +20,16 @@ Jest.describe.skip (
         Jest.test (
             "Should login",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 Jest
                     .expect(loggedIn.serverUrl)
-                    .toEqual (TestHelpers.server)
+                    .toEqual (TestHelpers.testData.Server)
 
                 Jest
                     .expect(loggedIn.user.pubkey)
@@ -36,11 +41,11 @@ Jest.describe.skip (
 
                 Jest
                     .expect(loggedIn.user.username.ToLowerInvariant())
-                    .toEqual (TestHelpers.username.ToLowerInvariant())
+                    .toEqual (TestHelpers.testData.User1.Username.ToLowerInvariant())
 
                 Jest
                     .expect(loggedIn.user.email)
-                    .toEqual (TestHelpers.email)
+                    .toEqual (TestHelpers.testData.User1.Email)
 
                 do! loggedIn.logout ()
             })
@@ -62,7 +67,7 @@ Jest.describe.skip (
                     { Fable.Etebase.User.email = randomEmail
                       username = randomUsername }
 
-                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.server)
+                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
 
                 Jest
                     .expect(response.user.email.ToLowerInvariant())
@@ -74,7 +79,12 @@ Jest.describe.skip (
         Jest.test (
             "Should logout",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 Jest.expect(loggedIn.authToken).not.toBeNull ()
 
@@ -101,7 +111,7 @@ Jest.describe.skip (
                     { User.email = randomEmail
                       username = randomUsername }
 
-                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.server)
+                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
 
                 Jest
                     .expect(response.user.email.ToLowerInvariant())
@@ -114,7 +124,7 @@ Jest.describe.skip (
                 do! response.logout ()
 
                 let! loggedInWithNewPassowrd =
-                    Account.account.login (randomUsername, newRandomPassword, TestHelpers.server)
+                    Account.account.login (randomUsername, newRandomPassword, TestHelpers.testData.Server)
 
                 Jest
                     .expect(loggedInWithNewPassowrd.user.username)
@@ -126,7 +136,12 @@ Jest.describe.skip (
         Jest.test (
             "Should fetch token",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 Jest.expect(loggedIn.authToken).not.toBeNull ()
                 loggedIn.authToken <- None
@@ -144,7 +159,12 @@ Jest.describe.skip (
         Jest.test (
             "Should get dashboard url",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let! getDashboardResponse =
                     (loggedIn.getDashboardUrl ())
@@ -160,7 +180,12 @@ Jest.describe.skip (
         Jest.test (
             "Should save and restore session",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 let encryptionKey =
                     Utilities.randomBytes (32)
@@ -175,14 +200,19 @@ Jest.describe.skip (
 
                 Jest
                     .expect(restored.user.username)
-                    .toEqual (TestHelpers.username.ToLowerInvariant())
+                    .toEqual (TestHelpers.testData.User1.Username.ToLowerInvariant())
             })
         )
 
         Jest.test (
             "Should get collection manager",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 Jest
                     .expect(loggedIn.getCollectionManager ())
@@ -193,7 +223,12 @@ Jest.describe.skip (
         Jest.test (
             "Should get invitation manager",
             (promise {
-                let! loggedIn = Account.account.login (TestHelpers.username, TestHelpers.password, TestHelpers.server)
+                let! loggedIn =
+                    Account.account.login (
+                        TestHelpers.testData.User1.Username,
+                        TestHelpers.testData.User1.Password,
+                        TestHelpers.testData.Server
+                    )
 
                 Jest
                     .expect(loggedIn.getCollectionManager ())

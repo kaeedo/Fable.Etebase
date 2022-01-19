@@ -21,7 +21,7 @@ type Item =
     abstract verify: unit -> bool
     abstract setContent: content: string -> Promise<unit>
     abstract setContent: content: byte array -> Promise<unit>
-
+    abstract delete: ?preserveContent: bool -> unit
 
 module Item =
     [<Import("Item", "Etebase")>]
