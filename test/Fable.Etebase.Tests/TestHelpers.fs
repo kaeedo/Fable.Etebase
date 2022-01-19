@@ -28,26 +28,20 @@ let randomStr =
 
         new System.String(randomChars)
 
-
-// let username = "JessicaHyde"
-// let password = "Mr. Rabbit"
-// let email = "jessicahyde@example.com"
-// let server = "http://172.18.122.191:3735"
-
 let testData =
     let testData =
         importDefault ("./testData.mjs")
 
     let user1 =
-        { TestUser.Username = testData?user1?username
-          Password = testData?user1?password
-          Email = testData?user1?email }
+        { TestUser.Username = "JessicaHyde"
+          Password = "WhereAmI"
+          Email = "jessicahyde@example.com" }
 
     let user2 =
-        { TestUser.Username = testData?user2?username
-          Password = testData?user2?password
-          Email = testData?user2?email }
+        { TestUser.Username = "WilsonWilson"
+          Password = "Mr. Rabbit"
+          Email = "wilsonwilson@example.com" }
 
-    { TestData.Server = testData?server
+    { TestData.Server = "http://172.18.122.191:3735"
       User1 = user1
       User2 = user2 }

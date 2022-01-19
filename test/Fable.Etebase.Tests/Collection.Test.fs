@@ -27,7 +27,7 @@ type CollectionItemOther =
         member this.mtime = None
         member this.``type`` = None
 
-Jest.describe (
+Jest.describe.skip (
     "Collection tests",
     fun () ->
         Jest.test (
