@@ -14,16 +14,16 @@ type ItemManager =
     abstract itemRevision: item: Item * ?options: RevisionsFetchOptions -> Promise<ListResponse<Item>>
     abstract fetchUpdates: items: Item array * ?options: ItemFetchOptions -> Promise<ItemListResult<Item>>
     abstract fetchMulti: items: string array * ?options: ItemFetchOptions -> Promise<ItemListResult<Item>>
-//abstract batch:
-// batch(items: Item[], deps?: Item[] | null, options?: ItemFetchOptions): Promise<void>;
-// transaction(items: Item[], deps?: Item[] | null, options?: ItemFetchOptions): Promise<void>;
-// uploadContent(item: Item): Promise<void>;
-// downloadContent(item: Item): Promise<void>;
-// subscribeChanges(cb: (data: CollectionItemListResponse<Item>) => void, options?: ItemFetchOptions): Promise<WebSocketHandle>;
-// cacheSave(item: Item, options?: {
-//     saveContent: boolean;
-// }): Uint8Array;
-// cacheLoad(cache: Uint8Array): Item;
+    abstract batch: items: Item array * ?dependencies: Item array * ?options: ItemFetchOptions -> Promise<unit>
+    abstract transaction: items: Item array * ?dependencies: Item array * ?options: ItemFetchOptions -> Promise<unit>
+    abstract uploadContent: item: Item -> Promise<unit>
+    abstract downloadContent: item: Item -> Promise<unit>
+
+    abstract subscribeChanges:
+        callback: (ItemListResult<Item> -> unit) * ?options: ItemFetchOptions -> Promise<WebSocketHandle>
+
+    abstract cacheSave: item: Item * ?options: CacheSaveOptions -> byte array
+    abstract cacheLoad: cache: byte array -> Item
 
 module ItemManager =
     [<Import("ItemManager", "Etebase")>]

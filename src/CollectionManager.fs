@@ -9,7 +9,7 @@ type CollectionManager =
     abstract getItemManager: collection: Collection -> ItemManager
     abstract getMemberManager: collection: Collection -> CollectionMemberManager
     abstract fetch: collectionUid: string * ?options: CollectionManagerFetchOptions -> Promise<Collection>
-    abstract cacheSave: collection: Collection * ?options: {| saveContent: bool |} -> byte array
+    abstract cacheSave: collection: Collection * ?options: CacheSaveOptions -> byte array
     abstract cacheLoad: cache: byte array -> Collection
     abstract upload: collection: Collection * ?options: CollectionManagerFetchOptions -> Promise<unit>
     abstract transaction: collection: Collection * ?options: CollectionManagerFetchOptions -> Promise<unit>

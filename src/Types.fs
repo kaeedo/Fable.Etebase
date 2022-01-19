@@ -11,7 +11,9 @@ type CollectionAccessLevel =
     | Admin = 1
     | ReadWrite = 2
 
-type RemovedCollection = {| uid: string |}
+type RemovedCollection = { uid: string }
+
+type CacheSaveOptions = { saveContent: bool }
 
 type ItemMetadata =
     abstract ``type``: string option

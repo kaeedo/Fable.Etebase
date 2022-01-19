@@ -21,6 +21,7 @@
   <ItemGroup>
     <Compile Include="Types.fs" />
     <Compile Include="Utilities.fs" />
+    <Compile Include="WebSocketHandle.fs" />
     <Compile Include="Item.fs" />
     <Compile Include="ItemManager.fs" />
     <Compile Include="Collection.fs" />
