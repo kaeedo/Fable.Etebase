@@ -12,6 +12,7 @@
   "scripts": {
     "install": "dotnet tool restore",
     "test": "node ./test/Fable.Etebase.Tests/testSetup.mjs && fable-splitter -c test/Fable.Etebase.Tests/splitter.config.js && jest -i",
+    "testt": "dotnet fable test/Fable.Etebase.Tests --outDir dist/tests && vitest --run --root ./dist/tests",
     "build": "dotnet fable src/Fable.Etebase.fsproj"
   },
   "husky": {
@@ -31,15 +32,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.16.7",
-    "@babel/plugin-transform-modules-commonjs": "7.16.8",
-    "@testing-library/jest-dom": "5.16.1",
-    "fable-compiler": "2.13.0",
-    "fable-splitter": "2.2.1",
     "husky": "7.0.4",
-    "jest": "27.4.7",
     "lint-staged": "12.1.7",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "vitest": "0.1.23"
   },
   "dependencies": {
     "etebase": "0.43.1"
