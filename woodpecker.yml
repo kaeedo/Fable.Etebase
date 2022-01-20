@@ -4,8 +4,10 @@ pipeline:
     commands:
       - npm i -g pnpm
       - pnpm i --unsafe-perm
+      - mkdir ./dist
+      - mkdir ./tests
       - pnpm run test
-      - ls -la
+      - ls ../../
       - ls ./dist
       - ls ./dist/tests
   a-test-step:
