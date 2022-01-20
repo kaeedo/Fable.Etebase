@@ -3,7 +3,7 @@ pipeline:
     image: nojaf/fable:2.6
     commands:
       - npm i -g pnpm
-      - pnpm i
+      - pnpm i --unsafe-perm
       - pnpm run test
   a-test-step:
     image: nojaf/fable:2.6

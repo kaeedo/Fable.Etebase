@@ -1,7 +1,7 @@
 import { Account } from "etebase";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const testData  = require("../../dist/tests/TestHelpers").testData;
+const testData = require("./dist/tests/TestHelpers").testData;
 
 async function check(username, email, password) {
   try {
@@ -21,4 +21,3 @@ await check(
   testData.User2.Email,
   testData.User2.Password
 );
-
