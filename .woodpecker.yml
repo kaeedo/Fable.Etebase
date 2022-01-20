@@ -14,7 +14,6 @@ pipeline:
       - pnpm run test
     when:
       event: tag
-      branch: main
   publish:
     image: mcr.microsoft.com/dotnet/sdk:6.0-focal
     commands:
@@ -23,7 +22,8 @@ pipeline:
       - dotnet fsi "updateVersion.fsx"
     when:
       event: tag
-      branch: main
 services:
   etebase-server:
     image: etesync/test-server:latest
+    when:
+      event: tag
