@@ -4,8 +4,7 @@ pipeline:
     commands:
       - apk add bash icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
       - wget https://dot.net/v1/dotnet-install.sh
-      - ls
-      - ./dotnet-install.sh -c Current
+      - bash ./dotnet-install.sh -c Current
       - pnpm i --unsafe-perm
       - pnpm run test
   a-test-step:
