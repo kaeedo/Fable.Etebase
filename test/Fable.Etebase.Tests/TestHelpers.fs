@@ -1,6 +1,9 @@
 [<RequireQualifiedAccess>]
 module TestHelpers
 
+open Fable.Core
+open Fable.Core.JsInterop
+
 type TestUser =
     { Username: string
       Password: string
@@ -24,6 +27,9 @@ let randomStr =
 
         new System.String(randomChars)
 
+[<Global>]
+let private process: obj = jsNative
+
 let testData =
     let user1 =
         { TestUser.Username = "JessicaHyde"
@@ -35,6 +41,14 @@ let testData =
           Password = "Mr. Rabbit"
           Email = "wilsonwilson@example.com" }
 
-    { TestData.Server = "http://etebase-server:3735"
+    let serverAddress =
+        let ci: string = process?env?CI
+
+        if ci.Length > 0 then
+            "http://etebase-server:3735"
+        else
+            "http://172.18.125.43:3735"
+
+    { TestData.Server = serverAddress
       User1 = user1
       User2 = user2 }
