@@ -3,9 +3,8 @@
     <Description>Fable bindings for Etebase JS</Description>
     <PackageProjectUrl>https://github.com/kaeedo/Fable.Etebase</PackageProjectUrl>
     <RepositoryUrl>https://github.com/kaeedo/Fable.Etebase.git</RepositoryUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/kaeedo/Fable.Etebase/main/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>
-    </PackageIconUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
     <PackageTags>fsharp;fable;etebase;etebase-js</PackageTags>
     <Authors>Kai Ito</Authors>
     <Version>0.0.1</Version>

@@ -15,8 +15,11 @@ pipeline:
       - DOTNET_CLI_TELEMETRY_OPTOUT=1
       - CI=true
       - dotnet fsi "updateVersion.fsx"
+      - dotnet pack -c Release ./src/Fable.Etebase.fsproj
+      - dotnet nuget push ./src/Fable.Etebase.fsproj/bin/Release/Fable.Etebase.*.nupkg -k $NUGET_PUSH -s https://api.nuget.org/v3/index.json
     when:
       event: tag
+    secrets: [ nuget_push ]
 services:
   etebase-server:
     image: etesync/test-server:latest
