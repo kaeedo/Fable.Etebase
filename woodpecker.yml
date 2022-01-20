@@ -3,7 +3,8 @@ pipeline:
     image: cl00e9ment/node.js-builder:light
     commands:
       - apk add bash icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
-      - curl -O https://dot.net/v1/dotnet-install.sh
+      - wget https://dot.net/v1/dotnet-install.sh
+      - ls
       - ./dotnet-install.sh -c Current
       - pnpm i --unsafe-perm
       - pnpm run test
