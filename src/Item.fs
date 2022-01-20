@@ -24,5 +24,5 @@ type Item =
     abstract delete: ?preserveContent: bool -> unit
 
 module Item =
-    [<Import("Item", "Etebase")>]
+    [<Import("Item", "etebase")>]
     let item: Item = jsNative

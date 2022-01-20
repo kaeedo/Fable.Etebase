@@ -27,6 +27,6 @@ type CollectionManager =
         callType: string array * ?options: CollectionManagerFetchOptions -> Promise<CollectionListResult<Collection>>
 
 module CollectionManager =
-    [<Import("CollectionManager", "Etebase")>]
+    [<Import("CollectionManager", "etebase")>]
     let collectionManager: CollectionManager =
         jsNative

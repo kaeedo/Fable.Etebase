@@ -27,5 +27,5 @@ type Collection =
     abstract getMeta<'a when 'a :> ItemMetadata> : unit -> 'a
 
 module Collection =
-    [<Import("Collection", "Etebase")>]
+    [<Import("Collection", "etebase")>]
     let collection: Collection = jsNative

@@ -11,6 +11,6 @@ type CollectionMemberManager =
     abstract list: ?options: FetchOptions -> Promise<ListResponse<CollectionMember>>
 
 module CollectionMemberManager =
-    [<Import("CollectionMemberManager", "Etebase")>]
+    [<Import("CollectionMemberManager", "etebase")>]
     let collectionMemberManager: CollectionMemberManager =
         jsNative

@@ -9,6 +9,6 @@ type WebSocketHandle =
     abstract unsubscribe: unit -> Promise<unit>
 
 module WebSocketHandle =
-    [<Import("WebSocketHandle", "Etebase")>]
+    [<Import("WebSocketHandle", "etebase")>]
     let webSocketHandle: WebSocketHandle =
         jsNative

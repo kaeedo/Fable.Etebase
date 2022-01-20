@@ -14,9 +14,6 @@ Jest.describe (
                 let toEncode = [| 1uy; 2uy; 3uy |]
                 let encoded = Utilities.toBase64 (toEncode)
 
-                Fable.Core.JS.console.log (TestHelpers.testData.User1.Username)
-                Fable.Core.JS.console.log (TestHelpers.testData.User2.Username)
-
                 Jest.expect(encoded).toEqual ("AQID")
         )
 
@@ -25,9 +22,6 @@ Jest.describe (
             fun () ->
                 let encoded = "AQID"
                 let decoded = Utilities.fromBase64 (encoded)
-
-                Fable.Core.JS.console.log (TestHelpers.testData.User1.Password)
-                Fable.Core.JS.console.log (TestHelpers.testData.User2.Password)
 
                 Jest
                     .expect(decoded)
@@ -38,9 +32,6 @@ Jest.describe (
             "Should generate random bytes",
             fun () ->
                 let randomBytes = Utilities.randomBytes 32
-
-                Fable.Core.JS.console.log (TestHelpers.testData.User1.Email)
-                Fable.Core.JS.console.log (TestHelpers.testData.User2.Email)
 
                 Jest.expect(randomBytes).toHaveLength (32)
         )

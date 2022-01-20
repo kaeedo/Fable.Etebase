@@ -21,6 +21,6 @@ type CollectionInvitationManager =
     abstract listOutgoing: ?options: FetchOptions -> Promise<ListResponse<SignedInvitation>>
 
 module CollectionInvitationManager =
-    [<Import("CollectionInvitationManager", "Etebase")>]
+    [<Import("CollectionInvitationManager", "etebase")>]
     let collectionInvitationManager: CollectionInvitationManager =
         jsNative

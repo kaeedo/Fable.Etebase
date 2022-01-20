@@ -25,5 +25,5 @@ type IAccount =
     abstract restore: accountDataStored: string * ?encryptionKey: byte array -> Promise<Account>
 
 module Account =
-    [<Import("Account", "Etebase")>]
+    [<Import("Account", "etebase")>]
     let account: IAccount = jsNative
