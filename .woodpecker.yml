@@ -13,7 +13,7 @@ pipeline:
       - pnpm i --unsafe-perm
       - pnpm run test
     when:
-      # event: tag
+      event: tag
       branch: main
   publish:
     image: mcr.microsoft.com/dotnet/sdk:6.0-focal
