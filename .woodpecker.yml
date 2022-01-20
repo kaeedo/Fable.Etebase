@@ -1,21 +1,16 @@
 
 pipeline:
   test:
-    image: mcr.microsoft.com/dotnet/sdk:6.0-focal
+    image: docker.pkg.github.com/kaeedo/fablebuilder/fablebuild:latest
     commands:
       - DOTNET_CLI_TELEMETRY_OPTOUT=1
       - CI=true
-      - apt update
-      - apt-get -y install curl gnupg
-      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
-      - apt-get -y install nodejs
-      - npm i -g pnpm
       - pnpm i --unsafe-perm
       - pnpm run test
     when:
       event: tag
   publish:
-    image: mcr.microsoft.com/dotnet/sdk:6.0-focal
+    image: docker.pkg.github.com/kaeedo/fablebuilder/fablebuild:latest
     commands:
       - DOTNET_CLI_TELEMETRY_OPTOUT=1
       - CI=true
