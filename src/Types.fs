@@ -73,16 +73,6 @@ type SignedInvitation =
 
 type UserProfile = { pubkey: byte array }
 
-type SignedInvitationRead =
-    { uid: string
-      version: int
-      username: string
-      Collection: string
-      accessLevel: CollectionAccessLevel
-      signedEncryptionKey: byte array
-      fromUsername: string option
-      fromPubkey: byte array }
-
 type ListResponse<'a> =
     { iterator: string
       ``done``: bool

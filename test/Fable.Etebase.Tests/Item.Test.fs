@@ -49,7 +49,7 @@ type ItemOther =
         member this.mtime = None
         member this.``type`` = None
 
-Jest.describe.skip (
+Jest.describe (
     "item tests",
     fun () ->
         Jest.test (

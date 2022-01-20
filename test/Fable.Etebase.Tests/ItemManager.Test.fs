@@ -27,7 +27,7 @@ type Item =
         member this.``type`` = None
 
 
-Jest.describe.skip (
+Jest.describe (
     "Item manager tests",
     fun () ->
         Jest.test (

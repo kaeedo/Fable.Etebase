@@ -5,9 +5,9 @@ open Fable.Core.JS
 open Fable.Core.JsInterop
 
 type CollectionMemberManager =
-    abstract modifyAccessLevel: username: string * accessLevel: CollectionAccessLevel -> Promise<obj>
-    abstract remove: username: string -> Promise<obj>
-    abstract leave: unit -> Promise<obj>
+    abstract modifyAccessLevel: username: string * accessLevel: CollectionAccessLevel -> Promise<unit>
+    abstract remove: username: string -> Promise<unit>
+    abstract leave: unit -> Promise<unit>
     abstract list: ?options: FetchOptions -> Promise<ListResponse<CollectionMember>>
 
 module CollectionMemberManager =

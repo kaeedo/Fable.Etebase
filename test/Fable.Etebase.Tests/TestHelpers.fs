@@ -1,10 +1,6 @@
 [<RequireQualifiedAccess>]
 module TestHelpers
 
-open Fable.Core
-open Fable.Core.JS
-open Fable.Core.JsInterop
-
 type TestUser =
     { Username: string
       Password: string
@@ -29,9 +25,6 @@ let randomStr =
         new System.String(randomChars)
 
 let testData =
-    let testData =
-        importDefault ("./testData.mjs")
-
     let user1 =
         { TestUser.Username = "JessicaHyde"
           Password = "WhereAmI"
@@ -42,6 +35,6 @@ let testData =
           Password = "Mr. Rabbit"
           Email = "wilsonwilson@example.com" }
 
-    { TestData.Server = "http://172.18.122.191:3735"
+    { TestData.Server = "http://172.18.125.43:3735"
       User1 = user1
       User2 = user2 }

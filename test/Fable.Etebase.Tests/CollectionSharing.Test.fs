@@ -16,21 +16,27 @@ type CollectionItem =
         member this.``type`` = None
 
 
-Jest.describe.skip (
+Jest.describe.only (
     "Collection Sharing tests",
     fun () ->
         Jest.test (
-            "Should modify access level",
+            "Should share collection",
             (promise {
-                let! loggedIn =
+                // Login as JessicaHyde and invite WilsonWilson
+                let! jessicaHyde =
                     Account.account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
                     )
 
+                let jhInvitationManager =
+                    jessicaHyde.getInvitationManager ()
+
+                let! wilsonWilsonProfile = jhInvitationManager.fetchUserProfile (TestHelpers.testData.User2.Username)
+
                 let collectionManager =
-                    loggedIn.getCollectionManager ()
+                    jessicaHyde.getCollectionManager ()
 
 
                 let randomContent =
@@ -44,18 +50,44 @@ Jest.describe.skip (
                 let! collection = collectionManager.create ("fable.etebase.testCol", item, randomContent)
                 do! collectionManager.upload (collection)
 
+                do!
+                    jhInvitationManager.invite (
+                        collection,
+                        TestHelpers.testData.User2.Username,
+                        wilsonWilsonProfile.pubkey,
+                        CollectionAccessLevel.ReadOnly
+                    )
+
+
+                // Login as WilsonWilson and accept the invitation
+                let! wilsonWilson =
+                    Account.account.login (
+                        TestHelpers.testData.User2.Username,
+                        TestHelpers.testData.User2.Password,
+                        TestHelpers.testData.Server
+                    )
+
+                let wwInvitationManager =
+                    wilsonWilson.getInvitationManager ()
+
+                let! invitations = wwInvitationManager.listIncoming ()
+                do! wwInvitationManager.accept (invitations.data.[0])
+
+                // Check collection membership
                 let memberManager =
                     collectionManager.getMemberManager (collection)
 
+                let! members = memberManager.list ()
+
+                let members =
+                    members.data |> Array.map (fun m -> m.username)
+
                 Jest
-                    .expect(collection.accessLevel)
-                    .toEqual (CollectionAccessLevel.Admin)
-
-                let! _ = memberManager.modifyAccessLevel ("TestHelpers.username", CollectionAccessLevel.ReadOnly)
-
-                Jest.expect(collection.accessLevel).toEqual (5)
-
-
+                    .expect(members)
+                    .toEqual (
+                        [| TestHelpers.testData.User1.Username.ToLowerInvariant()
+                           TestHelpers.testData.User2.Username.ToLowerInvariant() |]
+                    )
             })
         )
 )

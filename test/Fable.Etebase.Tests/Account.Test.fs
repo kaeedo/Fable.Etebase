@@ -4,7 +4,7 @@ open Fable.Jester
 open Fable.Etebase
 
 
-Jest.describe.skip (
+Jest.describe (
     "Account tests",
     fun () ->
         Jest.test (
@@ -121,7 +121,9 @@ Jest.describe.skip (
                     TestHelpers.randomStr (15)
 
                 do! response.changePassword (newRandomPassword)
+
                 do! response.logout ()
+                do! Promise.sleep 100
 
                 let! loggedInWithNewPassowrd =
                     Account.account.login (randomUsername, newRandomPassword, TestHelpers.testData.Server)
