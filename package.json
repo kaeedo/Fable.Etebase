@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": ">=14",
+    "node": ">=16",
     "pnpm": ">=6",
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm"

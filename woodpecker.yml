@@ -1,13 +1,13 @@
 pipeline:
   test:
-    image: cl00e9ment/node.js-builder:light
+    image: mcr.microsoft.com/dotnet/sdk:6.0-focal
     commands:
-      - apk add bash icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
-      - wget https://dot.net/v1/dotnet-install.sh
-      - bash ./dotnet-install.sh -c Current
+      - apt update
+      - apt install nodejs
+      - npm i -g pnpm
       - pnpm i --unsafe-perm
       - pnpm run test
   a-test-step:
-    image: cl00e9ment/node.js-builder:light
+    image: mcr.microsoft.com/dotnet/sdk:6.0-focal
     commands:
       - echo "Testing..."
