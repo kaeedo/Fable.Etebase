@@ -1,0 +1,10 @@
+pipeline:
+  test:
+    image: nojaf/fable:2.6
+    commands:
+      - pnpm i
+      - pnpm run test
+  a-test-step:
+    image: nojaf/fable:2.6
+    commands:
+      - echo "Testing.."
