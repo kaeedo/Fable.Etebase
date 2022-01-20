@@ -1,16 +1,11 @@
 pipeline:
   test:
-    image: nojaf/fable:2.6
+    image: cl00e9ment/node.js-builder:light
     commands:
       - npm i -g pnpm
-      - pnpm i --unsafe-perm
-      - mkdir ./dist
-      - mkdir ./tests
+      - pnpm i
       - pnpm run test
-      - ls ../../
-      - ls ./dist
-      - ls ./dist/tests
   a-test-step:
-    image: nojaf/fable:2.6
+    image: cl00e9ment/node.js-builder:light
     commands:
       - echo "Testing..."
