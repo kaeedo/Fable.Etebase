@@ -7,6 +7,8 @@ open Fable.Etebase
 Jest.describe (
     "Account tests",
     fun () ->
+        Jest.beforeEach (promise { do! Promise.sleep 500 })
+
         Jest.test (
             "Should be valid server",
             (promise {
