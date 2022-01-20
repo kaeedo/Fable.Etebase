@@ -13,3 +13,6 @@ pipeline:
     image: mcr.microsoft.com/dotnet/sdk:6.0-focal
     commands:
       - echo "Testing..."
+services:
+  etebase-server:
+    image: etesync/test-server:latest

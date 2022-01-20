@@ -35,6 +35,6 @@ let testData =
           Password = "Mr. Rabbit"
           Email = "wilsonwilson@example.com" }
 
-    { TestData.Server = "http://172.18.125.43:3735"
+    { TestData.Server = "http://etebase-server:3735"
       User1 = user1
       User2 = user2 }
