@@ -3,7 +3,9 @@ pipeline:
     image: mcr.microsoft.com/dotnet/sdk:6.0-focal
     commands:
       - apt update
-      - apt install nodejs -y
+      - apt-get -y install curl gnupg
+      - curl -sL https://deb.nodesource.com/setup_16.x  | bash -
+      - apt-get -y install nodejs
       - npm i -g pnpm
       - pnpm i --unsafe-perm
       - pnpm run test
