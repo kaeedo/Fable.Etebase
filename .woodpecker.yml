@@ -15,6 +15,15 @@ pipeline:
     when:
       # event: tag
       branch: main
+  publish:
+    image: mcr.microsoft.com/dotnet/sdk:6.0-focal
+    commands:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - CI=true
+      - dotnet fsi "updateVersion.fsx"
+    when:
+      event: tag
+      branch: main
 services:
   etebase-server:
     image: etesync/test-server:latest
