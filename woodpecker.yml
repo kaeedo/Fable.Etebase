@@ -6,9 +6,12 @@ pipeline:
       - echo "$CI"
       - echo "$DOTNET_CLI_TELEMETRY_OPTOUT"
       - echo "$NODE_ENV"
+      - printenv
   test:
     image: mcr.microsoft.com/dotnet/sdk:6.0-focal
     commands:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - CI=true
       - apt update
       - apt-get -y install curl gnupg
       - curl -sL https://deb.nodesource.com/setup_16.x  | bash -
