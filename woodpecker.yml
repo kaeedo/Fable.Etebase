@@ -5,8 +5,9 @@ pipeline:
       - npm i -g pnpm
       - pnpm i --unsafe-perm
       - pnpm run test
-      - ls dist
-      - ls dist/tests
+      - ls -la
+      - ls ./dist
+      - ls ./dist/tests
   a-test-step:
     image: nojaf/fable:2.6
     commands:
