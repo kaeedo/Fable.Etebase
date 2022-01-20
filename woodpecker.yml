@@ -2,8 +2,10 @@ pipeline:
   test:
     image: cl00e9ment/node.js-builder:light
     commands:
-      - npm i -g pnpm
-      - pnpm i
+      - apk add bash icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
+      - curl -O https://dot.net/v1/dotnet-install.sh
+      - ./dotnet-install.sh -c Current
+      - pnpm i --unsafe-perm
       - pnpm run test
   a-test-step:
     image: cl00e9ment/node.js-builder:light
