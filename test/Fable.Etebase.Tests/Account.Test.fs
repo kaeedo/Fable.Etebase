@@ -112,6 +112,7 @@ Jest.describe (
                       username = randomUsername }
 
                 let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
+                do! Promise.sleep 200
 
                 Jest
                     .expect(response.user.email.ToLowerInvariant())
@@ -121,9 +122,10 @@ Jest.describe (
                     TestHelpers.randomStr (15)
 
                 do! response.changePassword (newRandomPassword)
+                do! Promise.sleep 200
 
                 do! response.logout ()
-                do! Promise.sleep 100
+                do! Promise.sleep 200
 
                 let! loggedInWithNewPassowrd =
                     Account.account.login (randomUsername, newRandomPassword, TestHelpers.testData.Server)
