@@ -8,6 +8,8 @@ There are many examples in the test directory
 
 ## Development
 
+![status-badge](https://ci.codeberg.org/api/badges/CubeOfShame/Fable.Etebase/status.svg)
+
 Requires:
 
 - Node >=16
