@@ -16,7 +16,7 @@ pipeline:
       - CI=true
       - dotnet fsi "updateVersion.fsx"
       - dotnet pack -c Release ./src/Fable.Etebase.fsproj
-      - dotnet nuget push ./src/Fable.Etebase.fsproj/bin/Release/Fable.Etebase.*.nupkg -k $NUGET_PUSH -s https://api.nuget.org/v3/index.json
+      - dotnet nuget push ./src/bin/Release/Fable.Etebase.*.nupkg -k $NUGET_PUSH -s https://api.nuget.org/v3/index.json
     when:
       event: tag
     secrets: [ nuget_push ]
