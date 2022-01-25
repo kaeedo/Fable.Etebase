@@ -4,7 +4,7 @@
     <PackageProjectUrl>https://github.com/kaeedo/Fable.Etebase</PackageProjectUrl>
     <RepositoryUrl>https://github.com/kaeedo/Fable.Etebase.git</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>fsharp;fable;etebase;etebase-js</PackageTags>
     <Authors>Kai Ito</Authors>
     <Version>0.0.1</Version>
@@ -28,6 +28,9 @@
     <Compile Include="CollectionInvitationManager.fs" />
     <Compile Include="Account.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="/"/>
+</ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js" Exclude="**\*.fs.js" PackagePath="fable\" />
   </ItemGroup>
