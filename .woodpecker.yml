@@ -23,5 +23,5 @@ pipeline:
 services:
   etebase-server:
     image: etesync/test-server:latest
-  when:
-    event: [pull_request, tag]
+    when:
+      event: [pull_request, tag]
