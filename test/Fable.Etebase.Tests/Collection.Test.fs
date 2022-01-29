@@ -34,7 +34,7 @@ Jest.describe (
             "Should get collection type",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -67,7 +67,7 @@ Jest.describe (
             "Should verify",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -95,7 +95,7 @@ Jest.describe (
             "Should delete",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -125,7 +125,7 @@ Jest.describe (
             "Should set and get meta data",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -164,7 +164,7 @@ Jest.describe (
             "Should create and get content string",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server

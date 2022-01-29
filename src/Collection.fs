@@ -26,6 +26,3 @@ type Collection =
     abstract setMeta: metadata: #ItemMetadata -> unit
     abstract getMeta<'a when 'a :> ItemMetadata> : unit -> 'a
 
-module Collection =
-    [<Import("Collection", "etebase")>]
-    let collection: Collection = jsNative

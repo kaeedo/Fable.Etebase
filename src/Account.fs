@@ -24,6 +24,7 @@ type IAccount =
     abstract isEtebaseServer: serverUrl: string -> Promise<bool>
     abstract restore: accountDataStored: string * ?encryptionKey: byte array -> Promise<Account>
 
+[<AutoOpen>]
 module Account =
     [<Import("Account", "etebase")>]
-    let account: IAccount = jsNative
+    let Account: IAccount = jsNative

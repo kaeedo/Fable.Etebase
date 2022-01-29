@@ -25,6 +25,3 @@ type ItemManager =
     abstract cacheSave: item: Item * ?options: CacheSaveOptions -> byte array
     abstract cacheLoad: cache: byte array -> Item
 
-module ItemManager =
-    [<Import("ItemManager", "etebase")>]
-    let itemManager: ItemManager = jsNative

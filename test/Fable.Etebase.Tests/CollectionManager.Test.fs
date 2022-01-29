@@ -12,7 +12,7 @@ Jest.describe (
             "Should list collections",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -45,7 +45,7 @@ Jest.describe (
             "Should save and load to cache",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -85,7 +85,7 @@ Jest.describe (
             "Should fetch single item",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -118,7 +118,7 @@ Jest.describe (
             "Should get item manager",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -147,7 +147,7 @@ Jest.describe (
             "Should get collection member manager",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server

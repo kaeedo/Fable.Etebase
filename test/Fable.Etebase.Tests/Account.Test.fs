@@ -14,7 +14,7 @@ Jest.describe (
             (promise {
                 do!
                     Jest
-                        .expect(Account.account.isEtebaseServer (TestHelpers.testData.Server))
+                        .expect(Account.isEtebaseServer (TestHelpers.testData.Server))
                         .resolves.toBeTruthy ()
             })
         )
@@ -23,7 +23,7 @@ Jest.describe (
             "Should login",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -69,7 +69,7 @@ Jest.describe (
                     { Fable.Etebase.User.email = randomEmail
                       username = randomUsername }
 
-                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
+                let! response = Account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
 
                 Jest
                     .expect(response.user.email.ToLowerInvariant())
@@ -82,7 +82,7 @@ Jest.describe (
             "Should logout",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -113,7 +113,7 @@ Jest.describe (
                     { User.email = randomEmail
                       username = randomUsername }
 
-                let! response = Account.account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
+                let! response = Account.signup (randomUser, randomPassword, TestHelpers.testData.Server)
                 do! Promise.sleep 200
 
                 Jest
@@ -130,7 +130,7 @@ Jest.describe (
                 do! Promise.sleep 200
 
                 let! loggedInWithNewPassowrd =
-                    Account.account.login (randomUsername, newRandomPassword, TestHelpers.testData.Server)
+                    Account.login (randomUsername, newRandomPassword, TestHelpers.testData.Server)
 
                 Jest
                     .expect(loggedInWithNewPassowrd.user.username)
@@ -143,7 +143,7 @@ Jest.describe (
             "Should fetch token",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -166,7 +166,7 @@ Jest.describe (
             "Should get dashboard url",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -187,7 +187,7 @@ Jest.describe (
             "Should save and restore session",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -202,7 +202,7 @@ Jest.describe (
                     .expect(savedSession.Length)
                     .toBeGreaterThan (1)
 
-                let! restored = Account.account.restore (savedSession, encryptionKey)
+                let! restored = Account.restore (savedSession, encryptionKey)
 
                 Jest
                     .expect(restored.user.username)
@@ -214,7 +214,7 @@ Jest.describe (
             "Should get collection manager",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -230,7 +230,7 @@ Jest.describe (
             "Should get invitation manager",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server

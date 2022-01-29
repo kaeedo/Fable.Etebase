@@ -9,8 +9,3 @@ type CollectionMemberManager =
     abstract remove: username: string -> Promise<unit>
     abstract leave: unit -> Promise<unit>
     abstract list: ?options: FetchOptions -> Promise<ListResponse<CollectionMember>>
-
-module CollectionMemberManager =
-    [<Import("CollectionMemberManager", "etebase")>]
-    let collectionMemberManager: CollectionMemberManager =
-        jsNative

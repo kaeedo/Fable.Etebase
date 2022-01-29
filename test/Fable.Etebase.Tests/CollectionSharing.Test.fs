@@ -16,7 +16,7 @@ type CollectionItem =
         member this.``type`` = None
 
 
-Jest.describe.only (
+Jest.describe (
     "Collection Sharing tests",
     fun () ->
         Jest.test (
@@ -24,7 +24,7 @@ Jest.describe.only (
             (promise {
                 // Login as JessicaHyde and invite WilsonWilson
                 let! jessicaHyde =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -61,7 +61,7 @@ Jest.describe.only (
 
                 // Login as WilsonWilson and accept the invitation
                 let! wilsonWilson =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User2.Username,
                         TestHelpers.testData.User2.Password,
                         TestHelpers.testData.Server

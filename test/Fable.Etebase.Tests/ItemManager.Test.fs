@@ -34,7 +34,7 @@ Jest.describe (
             "Should create item",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -79,7 +79,7 @@ Jest.describe (
             "Should save and load from cache",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -125,7 +125,7 @@ Jest.describe (
             "Should upload and download content",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server
@@ -172,7 +172,7 @@ Jest.describe (
             "Should list items",
             (promise {
                 let! loggedIn =
-                    Account.account.login (
+                    Account.login (
                         TestHelpers.testData.User1.Username,
                         TestHelpers.testData.User1.Password,
                         TestHelpers.testData.Server

@@ -8,7 +8,7 @@ pipeline:
       - pnpm i --unsafe-perm
       - pnpm run test
     when:
-      event: tag
+      event: [pull_request, tag]
   publish:
     image: docker.pkg.github.com/kaeedo/fablebuilder/fablebuild:latest
     commands:
@@ -23,5 +23,5 @@ pipeline:
 services:
   etebase-server:
     image: etesync/test-server:latest
-    when:
-      event: tag
+  when:
+    event: [pull_request, tag]
