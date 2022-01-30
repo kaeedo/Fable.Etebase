@@ -11,7 +11,8 @@
   },
   "scripts": {
     "install": "dotnet tool restore",
-    "test": "fable-splitter -c test/Fable.Etebase.Tests/splitter.config.js && node ./test/Fable.Etebase.Tests/testSetup.mjs && jest -i"
+    "pretest": "node ./test/Fable.Etebase.Tests/testSetup.mjs && jest -i",
+    "test": "dotnet fable ./test/Fable.Etebase.Tests/ -o build/test --run web-test-runner build/test/*Test.js"
   },
   "husky": {
     "hooks": {
@@ -30,31 +31,19 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.16.7",
-    "@babel/plugin-transform-modules-commonjs": "7.16.8",
-    "@testing-library/jest-dom": "5.16.1",
-    "fable-compiler": "2.13.0",
-    "fable-splitter": "2.2.1",
+    "@rollup/plugin-commonjs": "21.0.1",
+    "@web/dev-server-esbuild": "0.2.16",
+    "@web/dev-server-import-maps": "0.0.6",
+    "@web/dev-server-rollup": "0.3.15",
+    "@web/test-runner": "0.13.26",
+    "@web/test-runner-playwright": "0.8.8",
     "husky": "7.0.4",
     "jest": "27.4.7",
     "lint-staged": "12.1.7",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "rollup": "2.66.1"
   },
   "dependencies": {
     "etebase": "0.43.1"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js"
-    ],
-    "testMatch": [
-      "<rootDir>/**/*.Test.js"
-    ],
-    "roots": [
-      "./dist/tests"
-    ],
-    "testTimeout": 15000,
-    "testEnvironment": "node",
-    "transform": {}
   }
 }

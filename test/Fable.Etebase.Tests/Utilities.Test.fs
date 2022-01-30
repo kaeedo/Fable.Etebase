@@ -1,38 +1,39 @@
 ﻿module Utilities.Test
 
-open Fable.Jester
+open Expect
+open Expect.Dom
+open WebTestRunner
 open Fable.Etebase
 
-Jest.describe (
-    "Base64 encoding",
-    fun () ->
-        Jest.beforeAll (promise { do! Utilities.ready })
+describe "Utilities tests" <| fun () ->
+    it "Should encode to base64" <| fun () ->
+        promise {
+            do! Utilities.ready
 
-        Jest.test (
-            "Should encode to base64",
-            fun () ->
-                let toEncode = [| 1uy; 2uy; 3uy |]
-                let encoded = Utilities.toBase64 (toEncode)
+            let toEncode = [| 1uy; 2uy; 3uy |]
+            let encoded = Utilities.toBase64 (toEncode)
 
-                Jest.expect(encoded).toEqual ("AQID")
-        )
+            encoded
+            |> Expect.equal "AQID"
+        }
 
-        Jest.test (
-            "Should decode from base64",
-            fun () ->
-                let encoded = "AQID"
-                let decoded = Utilities.fromBase64 (encoded)
+    it "Should decode from base64" <| fun () ->
+        promise {
+            do! Utilities.ready
 
-                Jest
-                    .expect(decoded)
-                    .toMatchObject ([| 1uy; 2uy; 3uy |])
-        )
+            let encoded = "AQID"
+            let decoded = Utilities.fromBase64 (encoded)
 
-        Jest.test (
-            "Should generate random bytes",
-            fun () ->
-                let randomBytes = Utilities.randomBytes 32
+            decoded
+            |> Expect.equal [| 1uy; 2uy; 3uy |]
+        }
 
-                Jest.expect(randomBytes).toHaveLength (32)
-        )
-)
+    it "Should generate random bytes" <| fun () ->
+        promise {
+            do! Utilities.ready
+
+            let randomBytes = Utilities.randomBytes 32
+
+            randomBytes.Length
+            |> Expect.equal 32
+        }
