@@ -1,3 +1,8 @@
+### 0.2.0
+
+- AutoOpen account module
+- Remove unnecessary modules
+
 ### 0.1.0
 
 - Include readme
