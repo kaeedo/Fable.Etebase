@@ -4,7 +4,7 @@ Fable bindings for [Etebase-js](https://github.com/etesync/etebase-js), to use t
 
 ## Examples
 
-There are many examples in the test directory
+There are many examples in the [test directory](https://github.com/kaeedo/Fable.Etebase/tree/main/test/Fable.Etebase.Tests)
 
 ## Development
 
