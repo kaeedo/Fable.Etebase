@@ -1,3 +1,7 @@
+### 0.2.1
+
+- Adjust package tags for fable packages browser
+
 ### 0.2.0
 
 - AutoOpen account module
